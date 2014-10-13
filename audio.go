@@ -1,32 +1,38 @@
 package main
 
 import (
-	"fmt"
-	"net"
+	"os/exec"
 )
 
 type Audio struct {
+	Playing bool
+
+	SetURL chan string
+	cmd    *exec.Cmd
 }
 
-func SetupSocket(id []byte) {
+func SetupAudio() *Audio {
 
-	addr, err := net.ResolveTCPAddr("tcp4", "192.168.1.131:6969")
-	panicOnError(err)
+	a := new(Audio)
+	a.SetURL = make(chan string)
 
-	conn, err := net.DialTCP("tcp4", nil, addr)
-	panicOnError(err)
+	go func() {
 
-	conn.Write(id)
-	fmt.Println("connected")
+		for {
 
-	for {
-		stream := make([]byte, 521)
-		n, err := conn.Read(stream)
-		panicOnError(err)
+			url := <-a.SetURL
 
-		if n > 0 {
+			if a.cmd != nil {
+				a.cmd.Process.Kill()
+			}
 
-			fmt.Println(stream)
+			a.cmd = exec.Command("omxplayer", url)
+			a.cmd.Start()
+			a.Playing = true
+			go a.cmd.Wait()
 		}
-	}
+
+	}()
+
+	return a
 }

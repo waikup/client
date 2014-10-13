@@ -8,7 +8,7 @@ import (
 )
 
 type Api struct {
-	Token        string
+	Token        string `json:"client_id"`
 	Major, Minor int
 }
 
