@@ -41,7 +41,7 @@ func (a *Api) StreamURL() string {
 
 func (a *Api) Shutup() error {
 
-	url := fmt.Sprintf("%s/setup", BASE_URL)
+	url := fmt.Sprintf("%s/shutup/%s", BASE_URL, a.Token)
 
 	resp, err := new(http.Client).Get(url)
 	if err != nil {
