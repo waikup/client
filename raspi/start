@@ -1,0 +1,4 @@
+#!/bin/sh
+
+sh /home/pi/bt.sh
+/home/pi/wakeup
