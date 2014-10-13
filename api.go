@@ -14,7 +14,8 @@ type Api struct {
 
 func ServerHandshake() (*Api, error) {
 
-	url := fmt.Sprintf("%s/setup", BASE_URL)
+	api_base := fmt.Sprintf(BASE_URL, *SERVER_IP)
+	url := fmt.Sprintf("%s/setup", api_base)
 
 	resp, err := new(http.Client).Get(url)
 	if err != nil {
@@ -36,12 +37,14 @@ func ServerHandshake() (*Api, error) {
 
 func (a *Api) StreamURL() string {
 
-	return fmt.Sprintf("%s/%s.mp3", BASE_URL, a.Token)
+	api_base := fmt.Sprintf(BASE_URL, *SERVER_IP)
+	return fmt.Sprintf("%s/stream/%s.mp3", api_base, a.Token)
 }
 
 func (a *Api) Shutup() error {
 
-	url := fmt.Sprintf("%s/shutup/%s", BASE_URL, a.Token)
+	api_base := fmt.Sprintf(BASE_URL, *SERVER_IP)
+	url := fmt.Sprintf("%s/shutup/%s", api_base, a.Token)
 
 	resp, err := new(http.Client).Get(url)
 	if err != nil {

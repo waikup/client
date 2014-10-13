@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"time"
 )
@@ -9,6 +10,12 @@ var self = struct {
 	*Api
 	*Audio
 }{}
+
+var SERVER_IP = flag.String("server", "192.168.1.34:8080", "THE FUCKING URL BRO")
+
+func init() {
+	flag.Parse()
+}
 
 func main() {
 
