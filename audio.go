@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os/exec"
 )
 
@@ -18,18 +19,31 @@ func SetupAudio() *Audio {
 
 	go func() {
 
+		finishChannel := make(chan error)
+		url := ""
+
 		for {
 
-			url := <-a.SetURL
+			select {
+			case url = <-a.SetURL:
+				break
+			case <-finishChannel:
+				break
+			}
 
 			if a.cmd != nil {
 				a.cmd.Process.Kill()
 			}
 
+			fmt.Println("Streaming", url)
+
 			a.cmd = exec.Command("omxplayer", url)
 			a.cmd.Start()
 			a.Playing = true
-			go a.cmd.Wait()
+
+			go func() {
+				finishChannel <- a.cmd.Wait()
+			}()
 		}
 
 	}()

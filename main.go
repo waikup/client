@@ -29,7 +29,6 @@ func main() {
 	fmt.Println("Turning beacon on")
 	SetupBeacon(api.Major, api.Minor)
 
-	fmt.Println("Turning audio on")
 	self.Audio = SetupAudio()
 	self.Audio.SetURL <- self.Api.StreamURL()
 
