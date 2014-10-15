@@ -10,6 +10,7 @@ import (
 type Api struct {
 	Token        string `json:"client_id"`
 	Major, Minor int
+	StreamURL    string `json:"stream_url"`
 }
 
 func ServerHandshake() (*Api, error) {
@@ -32,13 +33,9 @@ func ServerHandshake() (*Api, error) {
 
 	err = json.Unmarshal(body, &api)
 
+	api.StreamURL = fmt.Sprintf(api_base, api.StreamURL)
+
 	return api, err
-}
-
-func (a *Api) StreamURL() string {
-
-	api_base := fmt.Sprintf(BASE_URL, *SERVER_IP)
-	return fmt.Sprintf("%s/stream/%s.mp3", api_base, a.Token)
 }
 
 func (a *Api) Shutup() error {

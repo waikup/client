@@ -30,7 +30,7 @@ func main() {
 	SetupBeacon(api.Major, api.Minor)
 
 	self.Audio = SetupAudio()
-	self.Audio.SetURL <- self.Api.StreamURL()
+	self.Audio.SetURL <- self.Api.StreamURL
 
 	time.Sleep(100 * 24 * time.Hour)
 

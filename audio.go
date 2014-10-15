@@ -26,8 +26,10 @@ func SetupAudio() *Audio {
 
 			select {
 			case url = <-a.SetURL:
+				fmt.Println("Got new url yo")
 				break
 			case <-finishChannel:
+				fmt.Println("Stream ends...")
 				break
 			}
 
