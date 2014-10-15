@@ -33,7 +33,7 @@ func ServerHandshake() (*Api, error) {
 
 	err = json.Unmarshal(body, &api)
 
-	api.StreamURL = fmt.Sprintf(api_base, api.StreamURL)
+	api.StreamURL = fmt.Sprintf("%s%s", api_base, api.StreamURL)
 
 	return api, err
 }
