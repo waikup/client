@@ -33,7 +33,6 @@ func main() {
 	self.Audio.SetURL <- self.Api.StreamURL
 
 	time.Sleep(100 * 24 * time.Hour)
-
 }
 
 func panicOnError(err error) {
