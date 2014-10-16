@@ -3,4 +3,7 @@ package main
 const (
 	BEACON_UUID = "D9B9EC1F-3925-43D0-80A9-1E39D4CEA95D"
 	BASE_URL    = "http://%s/client"
+
+	CONTEXT_BROKER_TOKEN    = "X8Rz6cvA36nUGgoi6bA8EW0IQX79xqWajcV9BXRVEFtUFofSb_vVjLmly3yCUY884aOS3SaCcRZ070Bbk7QyQA"
+	CONTEXT_BROKER_BASE_URL = "http://orion.lab.fi-ware.org:1026/NGSI10"
 )

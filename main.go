@@ -9,6 +9,7 @@ import (
 var self = struct {
 	*Api
 	*Audio
+	*ContextBroker
 }{}
 
 var SERVER_IP = flag.String("server", "192.168.1.34:8080", "THE FUCKING URL BRO")
@@ -31,6 +32,9 @@ func main() {
 
 	self.Audio = SetupAudio()
 	self.Audio.SetURL <- self.Api.StreamURL
+
+	self.ContextBroker = SetupContextBroker()
+	self.ContextBroker.UpdateValue <- self.Api
 
 	time.Sleep(100 * 24 * time.Hour)
 }
